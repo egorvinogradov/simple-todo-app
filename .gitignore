@@ -1,0 +1,6 @@
+.idea/
+.meteor/
+*.css
+*.js
+packages/*
+public/bower_components/*

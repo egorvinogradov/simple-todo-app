@@ -1,0 +1,111 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tasks</title>
+    <script src="/bower_components/datejs/build/date.js"></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <a class="navbar-brand">Simple todo app</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            {{> tasks}}
+        </div>
+
+    </div>
+
+</body>
+
+
+<template name="tasks">
+    <ol class="tasks__list">
+        {{#each tasks}}
+            {{> task}}
+        {{/each}}
+    </ol>
+</template>
+
+
+<template name="task">
+
+    <li class="tasks__item {{#if form}}tasks__item_form{{/if}}" data-id="{{_id}}">
+
+        <div class="tasks__content">
+            <div class="tasks__status">
+                <div class="btn-group">
+                    <button type="button" class="tasks__status-button btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span class="tasks__status-button-text">
+                            {{status}}
+                        </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="tasks__status-item" data-value="opened">
+                            <a>Opened</a>
+                        </li>
+                        <li class="tasks__status-item" data-value="resolved">
+                            <a>Resolved</a>
+                        </li>
+                        <li class="tasks__status-item" data-value="cancelled">
+                            <a>Cancelled</a>
+                        </li>
+                        <li class="tasks__status-item" data-value="partial">
+                            <a>Partial</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="tasks__status-add" data-value="partial">
+                            <a>Add task</a>
+                        </li>
+                        <li class="tasks__status-remove">
+                            <a>
+                                <span class="text-danger">
+                                    Remove
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <span class="tasks__text tasks_{{status}}">
+                {{text}}
+            </span>
+        </div>
+
+        {{#if this.children}}
+            {{#console this.children}}{{/console}}
+            <ol class="tasks__list">
+                {{#each this.children}}
+                    {{> task}}
+                {{/each}}
+            </ol>
+        {{/if}}
+
+        {{#if form}}
+            {{> form}}
+        {{/if}}
+
+    </li>
+
+</template>
+
+
+
+<template name="form">
+    <div class="form">
+        <div class="form-group">
+            <textarea class="form__textarea form-control" rows="3" placeholder="Enter text"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="form__add btn btn-primary">
+                <i class="glyphicon glyphicon-floppy-disk"></i>
+                Save task
+            </button>
+        </div>
+    </div>
+</template>

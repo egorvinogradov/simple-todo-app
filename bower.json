@@ -1,0 +1,19 @@
+{
+    "name": "simple-todo-app",
+    "version": "1.0.0",
+    "authors": [
+        "Egor Vinogradov <egorvinogradov@live.ru>"
+    ],
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "datejs": "*"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
